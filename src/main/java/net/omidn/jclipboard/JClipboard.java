@@ -1,19 +1,19 @@
 package net.omidn.jclipboard;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
-import java.awt.datatransfer.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.ClipboardOwner;
+import java.awt.datatransfer.Transferable;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Objects;
 
 public class JClipboard extends Thread implements ClipboardOwner {
-    Clipboard sysClip = Toolkit.getDefaultToolkit().getSystemClipboard();
-    Repository repository = new Repository();
+    private static final Clipboard sysClip = Toolkit.getDefaultToolkit().getSystemClipboard();
+    private static final Repository repository = new Repository();
+    private static final HistoryWindow historyWindow = HistoryWindow.get();
+
 
     public void run() {
         Transferable trans = sysClip.getContents(this);
@@ -53,7 +53,7 @@ public class JClipboard extends Thread implements ClipboardOwner {
         try {
             systemTray.add(trayIcon);
             trayIcon.addActionListener(e -> {
-
+                historyWindow.showHistoryWindow();
             });
         } catch (AWTException e) {
             e.printStackTrace();
@@ -61,4 +61,6 @@ public class JClipboard extends Thread implements ClipboardOwner {
 
         b.start();
     }
+
+
 }
