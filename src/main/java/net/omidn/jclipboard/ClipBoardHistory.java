@@ -4,11 +4,11 @@ import java.awt.datatransfer.Transferable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Repository {
+public class ClipBoardHistory {
 
     private List<Transferable> history;
 
-    public Repository(){
+    public ClipBoardHistory(){
         history = new LinkedList<>();
     }
 

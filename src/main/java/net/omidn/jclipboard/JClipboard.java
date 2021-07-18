@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class JClipboard extends Thread implements ClipboardOwner {
     private static final Clipboard sysClip = Toolkit.getDefaultToolkit().getSystemClipboard();
-    private static final Repository repository = new Repository();
+    private static final ClipBoardHistory clipBoardHistory = new ClipBoardHistory();
     private static final HistoryWindow historyWindow = HistoryWindow.get();
 
 
@@ -34,7 +34,7 @@ public class JClipboard extends Thread implements ClipboardOwner {
 
     void processContents(Transferable t) {
         System.out.println("Processing: " + t);
-        repository.saveTransferable(t);
+        clipBoardHistory.saveTransferable(t);
     }
 
     void regainOwnership(Transferable t) {
@@ -53,7 +53,7 @@ public class JClipboard extends Thread implements ClipboardOwner {
         try {
             systemTray.add(trayIcon);
             trayIcon.addActionListener(e -> {
-                historyWindow.showHistoryWindow(repository);
+                historyWindow.showHistoryWindow(clipBoardHistory);
             });
         } catch (AWTException e) {
             e.printStackTrace();

@@ -37,14 +37,14 @@ public class HistoryWindow extends Window {
     }
 
 
-    public void showHistoryWindow(Repository repository) {
+    public void showHistoryWindow(ClipBoardHistory clipBoardHistory) {
 
 
         this.setBounds(posX, posY, width, height); // will change later
         this.setVisible(true);
         this.historyJList = new JList<>();
         historyJList.setCellRenderer(new HistoryListCellRenderer());
-        historyJList.setListData(repository.getHistory().toArray(new Transferable[0]));
+        historyJList.setListData(clipBoardHistory.getHistory().toArray(new Transferable[0]));
         this.add(historyJList);
     }
 
