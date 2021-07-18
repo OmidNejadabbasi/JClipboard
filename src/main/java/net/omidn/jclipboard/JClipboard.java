@@ -53,7 +53,7 @@ public class JClipboard extends Thread implements ClipboardOwner {
         try {
             systemTray.add(trayIcon);
             trayIcon.addActionListener(e -> {
-                historyWindow.showHistoryWindow();
+                historyWindow.showHistoryWindow(repository);
             });
         } catch (AWTException e) {
             e.printStackTrace();
