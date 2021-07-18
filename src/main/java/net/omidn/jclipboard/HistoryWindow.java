@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class HistoryWindow extends Window {
     private static HistoryWindow instance;
+    private ClipBoardHistory clipBoardHistory;
     private JList<Transferable> historyJList;
 
     private int height;
@@ -16,16 +17,16 @@ public class HistoryWindow extends Window {
     private int posY;
     private int posX;
 
-    public static HistoryWindow get(){
+    public static HistoryWindow create(ClipBoardHistory clipBoardHistory){
         if (instance==null){
-            instance = new HistoryWindow();
+            instance = new HistoryWindow(clipBoardHistory);
         }
         return instance;
     }
 
-    private HistoryWindow() {
+    private HistoryWindow(ClipBoardHistory clipBoardHistory) {
         super(null, null);
-
+        this.clipBoardHistory = clipBoardHistory;
         height = 500;
         width = 500;
         Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -37,7 +38,7 @@ public class HistoryWindow extends Window {
     }
 
 
-    public void showHistoryWindow(ClipBoardHistory clipBoardHistory) {
+    public void showHistoryWindow() {
 
 
         this.setBounds(posX, posY, width, height); // will change later
