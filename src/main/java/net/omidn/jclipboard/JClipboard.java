@@ -1,8 +1,15 @@
 package net.omidn.jclipboard;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Objects;
 
 public class JClipboard extends Thread implements ClipboardOwner {
     Clipboard sysClip = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -34,9 +41,23 @@ public class JClipboard extends Thread implements ClipboardOwner {
         sysClip.setContents(t, this);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         JClipboard b = new JClipboard();
 
+
+        SystemTray systemTray = SystemTray.getSystemTray();
+        BufferedImage trayIconImage = ImageIO.read(new File("src/main/resources/c.png"));
+        int trayIconWidth = systemTray.getTrayIconSize().width;
+        TrayIcon trayIcon = new TrayIcon(trayIconImage.getScaledInstance(trayIconWidth, -1, Image.SCALE_SMOOTH));
+
+        try {
+            systemTray.add(trayIcon);
+            trayIcon.addActionListener(e -> {
+
+            });
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
 
         b.start();
     }

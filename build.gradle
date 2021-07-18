@@ -1,9 +1,13 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group 'org.example'
 version '1.0-SNAPSHOT'
+
+
+mainClassName = 'net.omidn.jclipboard.JClipboard'
 
 repositories {
     mavenCentral()
